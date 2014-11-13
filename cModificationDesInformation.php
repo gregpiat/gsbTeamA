@@ -20,24 +20,12 @@
 	  // acquisition des données entrées, ici le numéro de mois et l'étape du traitement
 	  $idSaisi=lireDonneePost("lstVisiteur", "");
 	  $etape=lireDonneePost("etape","");
+	  $saisi = lireDonneePost("saisi","");
 	  $txtadresse = lireDonneePost("txtadresse","");
 	  $txtMDP = lireDonneePost("txtMDP","");
+	  setcookie ("id","$idSaisi");
 
-	  if ($etape != "demanderConsult" && $etape != "validerConsult") {
-		  // si autre valeur, on considère que c'est le début du traitement
-		  $etape = "demanderConsult";      
-	  } 
-	  if ($etape == "validerConsult") {
-	  
-		}
-	  if ($saisi != "demanderSaisi" && $saisi != "validerSaisi") {
-	  // si autre valeur, on considère que c'est le début du traitement
-		$saisi = "demanderSaisi";
-	  } 
-	  if ($saisi == "validerSaisi") { // l'utilisateur valide ses nouvelles données
-		  // vérification de l'existence de la fiche de frais pour le mois demandé
-		  // si elle n'existe pas, on la crée avec les élets frais forfaitisés à 0
-		}
+
 	?>
 		<div id="contenu">
 		  <h2>Modification des informations</h2>
@@ -93,9 +81,9 @@
 				  <input type="hidden" name="saisi" value="validerSaisi" />
 			  <p> 
 				<label for="txtadresse">Adresse : </label>
-				<input type="text" id="adresse" name="adresse" size="15" maxlength="30" value="<?php echo $adresse; ?>"><br><br>
+				<input type="text" id="txtadresse" name="txtadresse" size="15" maxlength="30" value="<?php echo $adresse; ?>"><br><br>
 				<label for="txtMDP">Mdp : </label>
-				<input type="text" id="mdp" name="mdp" size="15" maxlength="30" value="<?php echo $mdp; ?>">
+				<input type="text" id="txtMDP" name="txtMDP" size="15" maxlength="30" value="<?php echo $mdp; ?>">
 			  </p>
 			  </div>
 			  <div class="piedForm">
@@ -107,18 +95,19 @@
 			  </div>
 		  </form>
 	<?php
-			if ( $saisi == "validerSaisi" ) {
-			if ( nbErreurs($tabErreurs) > 0 ) {
-				echo toStringErreurs($tabErreurs) ;
-			}
-			else {
-				UpdateModifVisiteur($idSaisi,$txtadresse,$txtMDP);
-				echo "Saisi effectuer";
-				}
-			}
 		}
 	}
+	if ( $saisi == "validerSaisi" ) {
+		if ( nbErreurs($tabErreurs) > 0 ) {
+			echo toStringErreurs($tabErreurs) ;
 
+		}
+		else {
+			UpdateModifVisiteur($_COOKIE['id'],$txtadresse,$txtMDP);
+
+			echo "Mise a jour effectué";
+		}
+	}
 }
 
 else{
