@@ -21,11 +21,17 @@ function connecterServeurBD() {
     return mysql_connect($hote, $login, $mdp);
 }
 
-function newConnecterServeurBD() {
-    $hote = "localhost";
-    $login = "ModifForfaits";
-    $mdp = "ModifForfaits";
-    return mysql_connect($hote, $login, $mdp);
+function connecterServeurBDModifForfaits() {
+	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
+	  $utilisateur = 'ModifForfaits';
+	  $motDePasse = 'ModifForfaits';
+ 
+	// Options de connection
+		$options = array(
+		PDO::MYSQL_ATTR_INIT_COMMAND    => "SET NAMES utf8"
+	);
+	// Initialisation de la connection
+	return (new PDO( $dns, $utilisateur, $motDePasse, $options ));
 }
 
 function connectComptable($idIdentifiant){

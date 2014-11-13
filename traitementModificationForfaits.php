@@ -9,42 +9,42 @@
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
   
-  $etp=htmlspecialchars($_POST['ETP']);
-  $km=htmlspecialchars($_POST['KM']);
-  $nui=htmlspecialchars($_POST['NUI']);
-  $rep=htmlspecialchars($_POST['REP']);
   
-  //VERIFIER
-  //LES TYPES
-  // DES DONNEES
-  // PASSEES
-  // EN POST !
+   $testTypes = false;
+   $testVariablesEnvoyees = false;
+   
+  // Vérification de la récupération des varialbes
+    if (isset($_POST['ETP']) && (isset($_POST['KM'])) && (isset($_POST['NUI'])) && (isset($_POST['REP']))){
+            $etp=$_POST['ETP'];
+            $km=$_POST['KM'];
+            $nui=$_POST['NUI'];
+            $rep=$_POST['REP'];
+            $testVariablesEnvoyees = true;
+  }
+  
+    // Vérification du type des variables envoyées.
+    if((is_numeric($_POST['ETP']))&& (is_numeric($_POST['KM'])) && (is_numeric($_POST['NUI'])) && (is_numeric($_POST['REP']))){
+            $testTypes = true;
+    }
+  
   
 
-	try {
-	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
-	  $utilisateur = 'root';
-	  $motDePasse = 'root';
- 
-	// Options de connection
-		$options = array(
-		PDO::MYSQL_ATTR_INIT_COMMAND    => "SET NAMES utf8"
-	);
-
-	// Initialisation de la connection
-	$bdd = new PDO( $dns, $utilisateur, $motDePasse, $options );
-	} catch ( Exception $e ) {
+    try {
+            connecterServeurBDModifForfaits();
+            $bdd = connecterServeurBDModifForfaits();
+    } 
+    catch ( Exception $e ) {
 	echo "Connection à MySQL impossible : ", $e->getMessage();
 	die();
-}
+    }
 
-  
-  $bdd->exec('UPDATE fraisforfait SET montant="'.$etp.'" WHERE id="ETP"');
-  $bdd->exec('UPDATE fraisforfait SET montant="'.$km.'" WHERE id="KM"');
-  $bdd->exec('UPDATE fraisforfait SET montant="'.$nui.'" WHERE id="NUI"');
-  $bdd->exec('UPDATE fraisforfait SET montant="'.$rep.'" WHERE id="REP"');
-
+  if (($testVariablesEnvoyees) == true && ($testTypes == true)){
+        $bdd->exec('UPDATE fraisforfait SET montant="'.$etp.'" WHERE id="ETP"');
+        $bdd->exec('UPDATE fraisforfait SET montant="'.$km.'" WHERE id="KM"');
+        $bdd->exec('UPDATE fraisforfait SET montant="'.$nui.'" WHERE id="NUI"');
+        $bdd->exec('UPDATE fraisforfait SET montant="'.$rep.'" WHERE id="REP"');
+        ?><script>alert("Les forfaits ont bien été modifiés")</script><?php
+  }
 
 ?>
-<script>alert("Les forfaits ont bien été modifiés")</script>
-<meta http-equiv="refresh" content="0.1;http://172.17.100.160/cModificationDesForfait.php" />
+<meta http-equiv="refresh" content="0.1;http://localhost/gsbTeamA/cModificationDesForfait.php" />
