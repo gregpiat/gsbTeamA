@@ -34,7 +34,7 @@
       $existeFicheFrais = existeFicheFrais($idConnexion, $moisSaisi, obtenirIdUserConnecte());
       // si elle n'existe pas, on la crÃ©e avec les Ã©lets frais forfaitisÃ©s Ã  0
       if ( !$existeFicheFrais ) {
-          ajouterErreur($tabErreurs, "Le mois demand� est invalide");
+          ajouterErreur($tabErreurs, "Le mois demand� est invalide");
       }
       else {
           // rÃ©cupÃ©ration des donnÃ©es sur la fiche de frais demandÃ©e
@@ -42,16 +42,28 @@
       }
   } */                                 
 ?>
+
+<?php
+        if(isset($_POST['lstVisiteur'])) {
+            $lstVisiteur=$_POST['lstVisiteur'];
+        }
+        else {
+            $listeVisiteur=-1;
+        }
+?>
+
   <!-- Division principale -->
   <div id="contenu">
-      <h2>Liste des visiteurs</h2>
-      <h3>Visiteur : </h3>
+      <h2>Valider fiche de rais</h2>
+      <h3>Liste des visiteur : </h3>
       <form action="" method="post">
-      <div class="corpsForm">
-          <input type="hidden" name="etape" value="validerConsult" />
-      <p>
-        <label for="lstVisiteur">Visiteur : </label>
-        <select id="lstVisiteur" name="lstVisiteur" title="Seleclectionnez le visiteur souhaitee pour la fiche de frais">
+          <div class="corpsForm">
+              <input type="hidden" name
+      <form name ="form1" action="" method="post">
+          
+          <select name="lstVisiteur" onchange="fom1.submit();">
+              <label for="lstVisiteur">Visiteur : </label>
+              <option value = -1>-- Liste des utilisateur --</option>
             <?php
                 /*// on propose tous les mois pour lesquels le visiteur a une fiche de frais
                 $req = obtenirReqMoisFicheFrais(obtenirIdUserConnecte());
@@ -68,13 +80,20 @@
                 }
                 mysql_free_result($idJeuMois);*/
             // acquisition de la liste de visiteurs
-              $listeVisiteur = detailAllVisiteur();
-              while ($donnees = mysql_fetch_assoc($listeVisiteurs)) {
-                echo $donnees['id'];
-                echo $donnees['nom'];
-                echo $donnees['prenom'];
+              $listeVisiteur = listeVisiteur();
+              while ($donnees = mysql_fetch_array($listeVisiteur)) {
+?>              
+              <option value='<?php echo $donnees["nom"];
+                                   echo $donnees["prenom"];
+                      if($listeVisiteur == $donnees['nom'] and $listeVisiteur == $donnees['prenom']) { echo "selected"; }
+                      ?>'>
+                      <?php echo $donnees['nom'];
+                            echo $donnees['prenom'];
+                      ?>
+              </option>
+<?php
               }
-            ?>
+?>
         </select>
       </p>
       </div>

@@ -124,6 +124,12 @@ function obtenirDetailVisiteur($idCnx, $unId) {
     return $ligne ;
 }
 
+function listeVisiteur(){
+    $requete = "select nom, prenom from visiteur where comptableReferent != ''";
+        $lstVisiteur = mysql_query($requete);
+       return $lstVisiteur;
+}
+
 /** 
  * Fournit les informations d'une fiche de frais. 
  * Retourne les informations de la fiche de frais du mois de $unMois (MMAAAA)
