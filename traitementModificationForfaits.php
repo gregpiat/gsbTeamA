@@ -6,10 +6,9 @@
  */
   $repInclude = './include/';
   require($repInclude . "_init.inc.php");
-  
-
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
+  
   $etp=htmlspecialchars($_POST['ETP']);
   $km=htmlspecialchars($_POST['KM']);
   $nui=htmlspecialchars($_POST['NUI']);
