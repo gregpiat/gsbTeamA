@@ -58,27 +58,13 @@
       <h3>Liste des visiteur : </h3>
       <form action="" method="post">
           <div class="corpsForm">
-              <input type="hidden" name
-      <form name ="form1" action="" method="post">
-          
-          <select name="lstVisiteur" onchange="fom1.submit();">
+              <input type="hidden" name="etape" value="validerConsult" />
+          <p>
               <label for="lstVisiteur">Visiteur : </label>
-              <option value = -1>-- Liste des utilisateur --</option>
-            <?php
-                /*// on propose tous les mois pour lesquels le visiteur a une fiche de frais
-                $req = obtenirReqMoisFicheFrais(obtenirIdUserConnecte());
-                $idJeuMois = mysql_query($req, $idConnexion);
-                $lgMois = mysql_fetch_assoc($idJeuMois);
-                while ( is_array($lgMois) ) {
-                    $mois = $lgMois["mois"];
-                    $noMois = intval(substr($mois, 4, 2));
-                    $annee = intval(substr($mois, 0, 4));
-            ?>    
-            <option value="<?php echo $mois; ?>"<?php if ($moisSaisi == $mois) { ?> selected="selected"<?php } ?>><?php echo obtenirLibelleMois($noMois) . " " . $annee; ?></option>
-            <?php
-                    $lgMois = mysql_fetch_assoc($idJeuMois);        
-                }
-                mysql_free_result($idJeuMois);*/
+              <select id="lstVisiteur" name="lstVisiteur" title="Sélectionnez le visiteur dont la fiche de frais est à valider"></select>
+                      <?php
+                      ?>    
+                      <?php
             // acquisition de la liste de visiteurs
               $listeVisiteur = listeVisiteur();
               while ($donnees = mysql_fetch_array($listeVisiteur)) {
