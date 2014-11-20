@@ -13,6 +13,7 @@
    $testTypes = false;
    $testVariablesEnvoyees = false;
    $testPos = false;
+	
    
   // Vérification de la récupération des varialbes
     if (isset($_POST['ETP']) && (isset($_POST['KM'])) && (isset($_POST['NUI'])) && (isset($_POST['REP']))){
@@ -24,19 +25,30 @@
   }
   
     // Vérification du type et de la valeur des variables envoyées.
-    if((is_numeric($_POST['ETP']))&& (is_numeric($_POST['KM'])) && (is_numeric($_POST['NUI'])) && (is_numeric($_POST['REP']))){
-            $testTypes = true;
-			if(($_POST['ETP']>=0)&& ($_POST['KM']>=0) && ($_POST['NUI']>=0) && ($_POST['REP']>=0)){
-				$testPos = true;
-			}
-			else{
-				?><script>alert("Un forfait doit avoir une valeur positive !")</script><?php
-			}
-			
-    }
-	else{
-	?><script>alert("Merci d'entrer des valeurs numériques !")</script><?php
+
+	
+	if (verifierTypeDesVariables($_POST['ETP'], $_POST['KM'], $_POST['NUI'], $_POST['REP']) == true){
+		$testTypes = true;
 	}
+	else{
+		?><script>alert("Un forfait doit-être une valeur numérique !")</script><?php
+	}
+	
+	if ($testTypes == true){
+		if(verifierValeurDesVariables($_POST['ETP'], $_POST['KM'], $_POST['NUI'], $_POST['REP']) == true){
+			$testPos = true;
+		}
+		else{
+			?><script>alert("Un forfait doit-être positif !")</script><?php
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 
     try {
             connecterServeurBDModifForfaits();
