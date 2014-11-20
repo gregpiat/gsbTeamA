@@ -56,7 +56,7 @@ function verifierValeurDesVariables($variable1, $variable2, $variable3, $variabl
 			return true;
 		}
 		else{
-			return false;
+		return false;
 		}
 }
 

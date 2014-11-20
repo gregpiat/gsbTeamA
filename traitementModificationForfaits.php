@@ -10,6 +10,7 @@
   require($repInclude . "_sommaire.inc.php");
   
   
+  
    $testTypes = false;
    $testVariablesEnvoyees = false;
    $testPos = false;
@@ -25,8 +26,6 @@
   }
   
     // Vérification du type et de la valeur des variables envoyées.
-
-	
 	if (verifierTypeDesVariables($_POST['ETP'], $_POST['KM'], $_POST['NUI'], $_POST['REP']) == true){
 		$testTypes = true;
 	}
@@ -44,12 +43,7 @@
 	}
 	
 	
-	
-	
-	
-	
-	
-
+	// Connection à la base de données
     try {
             connecterServeurBDModifForfaits();
             $bdd = connecterServeurBDModifForfaits();
@@ -59,6 +53,8 @@
 	die();
     }
 
+	// Si les variables ont été reçues, sont de type numérique et sont de valeur positives,
+	// on les insert dans la base de données.
   if (($testVariablesEnvoyees) == true && ($testTypes == true) && ($testPos == true)){
         $bdd->exec('UPDATE fraisforfait SET montant="'.$etp.'" WHERE id="ETP"');
         $bdd->exec('UPDATE fraisforfait SET montant="'.$km.'" WHERE id="KM"');
