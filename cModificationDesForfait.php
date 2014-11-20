@@ -42,6 +42,7 @@
 while ($donnees = $reponse->fetch())
 {
 ?>
+<br>
 <p>
     <strong>FORFAIT</strong> : <?php echo $donnees['libelle']; ?><br />
 </p>
@@ -58,6 +59,7 @@ while ($donnees = $reponse->fetch())
      <input type="submit" value="Modifier les forfaits" />
  </p>
 </form>
+<br><br><br>
 <?php
 
 $reponse->closeCursor(); // Termine le traitement de la requête
