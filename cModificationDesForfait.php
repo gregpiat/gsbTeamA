@@ -14,14 +14,11 @@
   }
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
-  
-
-	$today = date("j"); 
-	if($today == 20) {
-		$mois = date("Ym");
-		modifierEtat($mois, connecterServeurBD());
-	}
-
+?>
+<div id="contenu">
+      <h2>Modification des forfaits </h2>
+	  
+<?php
 			
 	try {
 	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
@@ -71,3 +68,4 @@ while ($donnees = $reponse->fetch())
 
 $reponse->closeCursor(); // Termine le traitement de la requête
 ?>
+</div>
