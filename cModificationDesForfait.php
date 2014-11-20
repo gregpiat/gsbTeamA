@@ -1,4 +1,5 @@
 <?php
+
 /** 
  * Script de contrôle et d'affichage du cas d'utilisation "Consulter une fiche de frais"
  * @package default
@@ -14,8 +15,14 @@
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
   
- 
 
+	$today = date("j"); 
+	if($today == 20) {
+		$mois = date("Ym");
+		modifierEtat($mois, connecterServeurBD());
+	}
+
+			
 	try {
 	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
 	  $utilisateur = 'root';

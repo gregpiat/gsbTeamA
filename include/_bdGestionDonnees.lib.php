@@ -424,6 +424,14 @@ function modifierEtatFicheFrais($idCnx, $unMois, $unIdVisiteur, $unEtat) {
 } 
 
 
+// Fonction qui modifie l'état des fiches du mois en cours en "Cloturé";
+function modifierEtat($unMois, $idCnx) {
+    $requete = "update fichefrais set idEtat = 'CL 
+               ' where mois = '". $unMois . "' and idEtat = 'CR'";
+    mysql_query($requete, $idCnx);
+}
+
+
 
 function mettreAJourForfaits($modif1, $modif2, $modif3, $modif4){
     	$bdd->exec('UPDATE fraisforfait SET montant="'.$etp.'" WHERE id="ETP"');
