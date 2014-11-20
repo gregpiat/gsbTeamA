@@ -17,6 +17,7 @@
 ?>
 <div id="contenu">
       <h2>Modification des forfaits </h2>
+	  <p>Merci de n'entrer que des valeurs de type numerique, ou les modifications ne prendront pas effet.</p>
 	  
 <?php
 			
