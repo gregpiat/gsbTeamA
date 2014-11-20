@@ -26,6 +26,9 @@
     if((is_numeric($_POST['ETP']))&& (is_numeric($_POST['KM'])) && (is_numeric($_POST['NUI'])) && (is_numeric($_POST['REP']))){
             $testTypes = true;
     }
+	else{
+	?><script>alert("Merci d'entrer des valeurs numériques !")</script><?php
+	}
   
   
 
