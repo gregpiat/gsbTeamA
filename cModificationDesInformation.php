@@ -23,6 +23,11 @@
 	  $saisi = lireDonneePost("saisi","");
 	  $txtadresse = lireDonneePost("txtadresse","");
 	  $txtMDP = lireDonneePost("txtMDP","");
+          $txtnom = lireDonneePost("txtnom","");
+          $txtprenom = lireDonneePost("txtprenom","");
+          $txtville = lireDonneePost("txtville","");
+          $txtcp = lireDonneePost("txtcp","");
+          $txtlogin = lireDonneePost("txtlogin","");
 	  setcookie ("id","$idSaisi");
 
 
@@ -74,13 +79,28 @@
 			while ($reqUser = mysql_fetch_array($req)) {
 			  $adresse = $reqUser['adresse'];
 			  $mdp = $reqUser['mdp'];
+                          $nom = $reqUser['nom'];
+                          $prenom = $reqUser['prenom'];
+                          $login =$reqUser['login'];
+                          $cp =$reqUser['cp'];
+                          $ville=$reqUser['ville'];
 			}
 	?>
 		  <form action="" method="post">
 			  <div class="corpsForm">
 				  <input type="hidden" name="saisi" value="validerSaisi" />
 			  <p> 
-				<label for="txtadresse">Adresse : </label>
+				<label for="txtnom">Nom : </label>
+				<input type="text" id="txtnom" name="txtnom" size="15" maxlength="30" value="<?php echo $nom; ?>"><br><br>
+                                <label for="txtprenom">Prénom : </label>
+				<input type="text" id="txtprenom" name="txtprenom" size="15" maxlength="30" value="<?php echo $prenom; ?>"><br><br>
+                                <label for="txtlogin">Login : </label>
+				<input type="text" id="txtlogin" name="txtlogin" size="15" maxlength="30" value="<?php echo $login; ?>"><br><br>
+                                <label for="txtville">Ville : </label>
+				<input type="text" id="txtville" name="txtville" size="15" maxlength="30" value="<?php echo $ville; ?>"><br><br>
+                                <label for="txtcp">CP : </label>
+				<input type="text" id="txtcp" name="txtcp" size="15" maxlength="30" value="<?php echo $cp; ?>"><br><br>
+                                <label for="txtadresse">Adresse : </label>
 				<input type="text" id="txtadresse" name="txtadresse" size="15" maxlength="30" value="<?php echo $adresse; ?>"><br><br>
 				<label for="txtMDP">Mdp : </label>
 				<input type="text" id="txtMDP" name="txtMDP" size="15" maxlength="30" value="<?php echo $mdp; ?>">
@@ -103,9 +123,26 @@
 
 		}
 		else {
-			UpdateModifVisiteur($_COOKIE['id'],$txtadresse,$txtMDP);
-
-			echo "Mise a jour effectué";
+			UpdateModifVisiteur($_COOKIE['id'],$txtnom, $txtprenom, $txtlogin, $txtMDP, $txtadresse, $txtcp, $txtville);
+                        $req = recupModifVisiteur($_COOKIE['id']);
+                        echo "<strong>Les informations modifié</strong><br>";
+			while ($reqUser = mysql_fetch_array($req)) {
+			  echo "Adresse : ", $reqUser['adresse'];
+                          echo "<br>";
+			  echo "mdp : ",$reqUser['mdp'];
+                          echo "<br>";
+                          echo "Nom : ",$reqUser['nom'];
+                          echo "<br>";
+                          echo "Prenom : ",$reqUser['prenom'];
+                          echo "<br>";
+                          echo "Login : ",$reqUser['login'];
+                          echo "<br>";
+                          echo "CP : ",$reqUser['cp'];
+                          echo "<br>";
+                          echo "Ville : ",$reqUser['ville'];
+                          echo "<br>";
+			}
+			echo "<strong>Mise a jour effectué</strong>";
 		}
 	}
 }
