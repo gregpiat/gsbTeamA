@@ -81,8 +81,8 @@ function recupModifVisiteur($idVisiteur){
 	$modifVisiteur = mysql_query($requete);
     return $modifVisiteur ;
 }
-function UpdateModifVisiteur($idVisiteur,$adresseVisiteur,$mdpVisiteur){
-	$requete = "update visiteur set adresse = '".$adresseVisiteur."', mdp = '".$mdpVisiteur."' where id='".$idVisiteur."'";
+function UpdateModifVisiteur($idSaisi,$txtNom, $txtPrenom, $txtLogin, $txtMdp, $txtAdresse, $txtCp, $txtVille, $txtDateEmbauche){
+	$requete = "update visiteur set nom = '".$txtNom."', prenom = '".$txtPrenom."', login = '".$txtLogin."', mdp = '".$txtMdp."', adresse = '".$txtAdresse."', cp = '".$txtCp."', ville = '".$txtVille."', dateEmbauche = '".$txtDateEmbauche."' where id='".$idVisiteur."'";
 	mysql_query($requete);
 }
 
