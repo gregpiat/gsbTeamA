@@ -10,8 +10,11 @@
   require($repInclude . "_sommaire.inc.php");
   
   
+  
    $testTypes = false;
    $testVariablesEnvoyees = false;
+   $testPos = false;
+	
    
   // Vérification de la récupération des varialbes
     if (isset($_POST['ETP']) && (isset($_POST['KM'])) && (isset($_POST['NUI'])) && (isset($_POST['REP']))){
@@ -22,13 +25,25 @@
             $testVariablesEnvoyees = true;
   }
   
-    // Vérification du type des variables envoyées.
-    if((is_numeric($_POST['ETP']))&& (is_numeric($_POST['KM'])) && (is_numeric($_POST['NUI'])) && (is_numeric($_POST['REP']))){
-            $testTypes = true;
-    }
-  
-  
-
+    // Vérification du type et de la valeur des variables envoyées.
+	if (verifierTypeDesVariables($_POST['ETP'], $_POST['KM'], $_POST['NUI'], $_POST['REP']) == true){
+		$testTypes = true;
+	}
+	else{
+		?><script>alert("Un forfait doit-être une valeur numérique !")</script><?php
+	}
+	
+	if ($testTypes == true){
+		if(verifierValeurDesVariables($_POST['ETP'], $_POST['KM'], $_POST['NUI'], $_POST['REP']) == true){
+			$testPos = true;
+		}
+		else{
+			?><script>alert("Un forfait doit-être positif !")</script><?php
+		}
+	}
+	
+	
+	// Connection à la base de données
     try {
             connecterServeurBDModifForfaits();
             $bdd = connecterServeurBDModifForfaits();
@@ -38,7 +53,9 @@
 	die();
     }
 
-  if (($testVariablesEnvoyees) == true && ($testTypes == true)){
+	// Si les variables ont été reçues, sont de type numérique et sont de valeur positives,
+	// on les insert dans la base de données.
+  if (($testVariablesEnvoyees) == true && ($testTypes == true) && ($testPos == true)){
         $bdd->exec('UPDATE fraisforfait SET montant="'.$etp.'" WHERE id="ETP"');
         $bdd->exec('UPDATE fraisforfait SET montant="'.$km.'" WHERE id="KM"');
         $bdd->exec('UPDATE fraisforfait SET montant="'.$nui.'" WHERE id="NUI"');

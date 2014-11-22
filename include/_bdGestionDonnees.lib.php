@@ -20,7 +20,15 @@ function connecterServeurBD() {
     $mdp = "root";
     return mysql_connect($hote, $login, $mdp);
 }
-
+/** 
+ * Se connecte au serveur de donn�es MySql.                      
+ * Se connecte au serveur de donn�es MySql � partir de valeurs
+ * pr�d�finies de connexion (h�te, compte utilisateur et mot de passe). 
+ * Retourne l'identifiant de connexion si succ�s obtenu, le bool�en false 
+ * si probl�me de connexion.
+ * SE CONNECTE AVEC UN UTILISATEUR DIFFERENT, QUI N'A DES DROITS QUE POUR LA MODIFICATION DES FRAIS FORFAIT.
+ * @return resource identifiant de connexion
+  */
 function connecterServeurBDModifForfaits() {
 	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
 	  $utilisateur = 'ModifForfaits';
@@ -32,6 +40,24 @@ function connecterServeurBDModifForfaits() {
 	);
 	// Initialisation de la connection
 	return (new PDO( $dns, $utilisateur, $motDePasse, $options ));
+}
+
+function verifierTypeDesVariables($variable1, $variable2, $variable3, $variable4){
+	    if((is_numeric($variable1))&& (is_numeric($variable2)) && (is_numeric($variable3)) && (is_numeric($variable4))){
+			return true;
+		}
+		else{
+			return false;
+		}
+}
+
+function verifierValeurDesVariables($variable1, $variable2, $variable3, $variable4){
+		if(($variable1>=0)&& ($variable2>=0) && ($variable3>=0) && ($variable4>=0)){
+			return true;
+		}
+		else{
+		return false;
+		}
 }
 
 function connectComptable($idIdentifiant){
@@ -396,6 +422,14 @@ function modifierEtatFicheFrais($idCnx, $unMois, $unIdVisiteur, $unEtat) {
                $unIdVisiteur . "' and mois = '". $unMois . "'";
     mysql_query($requete, $idCnx);
 } 
+
+
+// Fonction qui modifie l'état des fiches du mois en cours en "Cloturé";
+function modifierEtat($unMois, $idCnx) {
+    $requete = "update fichefrais set idEtat = 'CL 
+               ' where mois = '". $unMois . "' and idEtat = 'CR'";
+    mysql_query($requete, $idCnx);
+}
 
 
 

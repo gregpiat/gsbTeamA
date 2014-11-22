@@ -1,4 +1,5 @@
 <?php
+
 /** 
  * Script de contrôle et d'affichage du cas d'utilisation "Consulter une fiche de frais"
  * @package default
@@ -13,9 +14,13 @@
   }
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
-  
- 
-
+?>
+<div id="contenu">
+      <h2>Modification des forfaits </h2>
+	  <p>Merci de n'entrer que des valeurs de type numerique, ou les modifications ne prendront pas effet.</p>
+	  
+<?php
+			
 	try {
 	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
 	  $utilisateur = 'root';
@@ -42,6 +47,7 @@
 while ($donnees = $reponse->fetch())
 {
 ?>
+<br>
 <p>
     <strong>FORFAIT</strong> : <?php echo $donnees['libelle']; ?><br />
 </p>
@@ -58,7 +64,9 @@ while ($donnees = $reponse->fetch())
      <input type="submit" value="Modifier les forfaits" />
  </p>
 </form>
+<br><br><br>
 <?php
 
 $reponse->closeCursor(); // Termine le traitement de la requête
 ?>
+</div>
