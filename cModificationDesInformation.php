@@ -31,6 +31,8 @@
 	  setcookie ("id","$idSaisi");
 
 
+
+
 	?>
 		<div id="contenu">
 		  <h2>Modification des informations</h2>
@@ -60,7 +62,7 @@
 		  <div class="piedForm">
 		  <p>
 			<input id="ok" type="submit" value="Valider" size="20"
-				   title="Demandez à consulter cette fiche de frais" />
+				   title="Valide la selection" />
 			<input id="annuler" type="reset" value="Effacer" size="20" />
 		  </p> 
 		  </div>
@@ -75,16 +77,17 @@
 			echo toStringErreurs($tabErreurs) ;
 		}
 		else {
-			$req = recupModifVisiteur($idSaisi);
-			while ($reqUser = mysql_fetch_array($req)) {
-			  $adresse = $reqUser['adresse'];
-			  $mdp = $reqUser['mdp'];
-                          $nom = $reqUser['nom'];
-                          $prenom = $reqUser['prenom'];
-                          $login =$reqUser['login'];
-                          $cp =$reqUser['cp'];
-                          $ville=$reqUser['ville'];
-			}
+
+                    $req = recupModifVisiteur($idSaisi);
+                    while ($reqUser = mysql_fetch_array($req)) {
+                      $adresse = $reqUser['adresse'];
+                      $mdp = $reqUser['mdp'];
+                      $nom = $reqUser['nom'];
+                      $prenom = $reqUser['prenom'];
+                      $login =$reqUser['login'];
+                      $cp =$reqUser['cp'];
+                      $ville=$reqUser['ville'];
+                    }
 	?>
 		  <form action="" method="post">
 			  <div class="corpsForm">
@@ -109,7 +112,7 @@
 			  <div class="piedForm">
 			  <p>
 				<input id="okSaisi" type="submit" value="Valider" size="20"
-					   title="Demandez à consulter cette fiche de frais" />
+					   title="Valide les données modifié" />
 				<input id="annuler" type="reset" value="Effacer" size="20" />
 			  </p> 
 			  </div>
@@ -143,6 +146,14 @@
                           echo "<br>";
 			}
 			echo "<strong>Mise a jour effectué</strong>";
+                        ?>
+                        <form action="" method="post">
+                            <input type="hidden" name="etape" value="validerConsult" />
+                            <input type="hidden" name="lstVisiteur" value="<?php echo $_COOKIE['id']; ?>" />
+                            <input id='okSaisi' type='submit' value='Retry' size='20'
+                            title='retry' />
+                        </form>
+                        <?php
 		}
 	}
 }
