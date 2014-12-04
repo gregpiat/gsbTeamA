@@ -150,7 +150,7 @@
                         <form action="" method="post">
                             <input type="hidden" name="etape" value="validerConsult" />
                             <input type="hidden" name="lstVisiteur" value="<?php echo $_COOKIE['id']; ?>" />
-                            <input id='okSaisi' type='submit' value='Retry' size='20'
+                            <input id='okSaisi' type='submit' value='Modifier' size='20'
                             title='retry' />
                         </form>
                         <?php
