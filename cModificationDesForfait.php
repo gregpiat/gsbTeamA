@@ -43,7 +43,10 @@
  $reponse = $bdd->query('SELECT * from fraisforfait');
 
 // On affiche chaque entrée une à une
-	?><form method="post" action="traitementModificationForfaits.php"><?php
+	?>
+	
+	<fieldset><legend>Modification des forfaits</legend>
+	<form method="post" action="traitementModificationForfaits.php"><?php
 while ($donnees = $reponse->fetch())
 {
 ?>
@@ -70,3 +73,4 @@ while ($donnees = $reponse->fetch())
 $reponse->closeCursor(); // Termine le traitement de la requête
 ?>
 </div>
+</fieldset>
