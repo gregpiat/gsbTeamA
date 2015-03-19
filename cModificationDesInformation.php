@@ -36,7 +36,8 @@
 	?>
 		<div id="contenu">
 		  <h2>Modification des informations</h2>
-		  <h3>Selection d'un visiteur</h3>
+                  <fieldset>
+                  <legend><h3>Selection d'un visiteur</h3></legend>
 		  <form action="" method="post">
 		  <div class="corpsForm">
 			  <input type="hidden" name="etape" value="validerConsult" />
@@ -59,15 +60,16 @@
 			</select>
 		  </p>
 		  </div>
+                  
 		  <div class="piedForm">
 		  <p>
 			<input id="ok" type="submit" value="Valider" size="20"
 				   title="Valide la selection" />
-			<input id="annuler" type="reset" value="Effacer" size="20" />
 		  </p> 
 		  </div>
 			
 		  </form>
+                  </fieldset>
 		  <?php      
 
 // demande et affichage des différents éléments (forfaitisés et non forfaitisés)
@@ -89,6 +91,7 @@
                       $ville=$reqUser['ville'];
                     }
 	?>
+                  <fieldset>
 		  <form action="" method="post">
 			  <div class="corpsForm">
 				  <input type="hidden" name="saisi" value="validerSaisi" />
@@ -113,10 +116,10 @@
 			  <p>
 				<input id="okSaisi" type="submit" value="Valider" size="20"
 					   title="Valide les données modifié" />
-				<input id="annuler" type="reset" value="Effacer" size="20" />
 			  </p> 
 			  </div>
 		  </form>
+                  </fieldset>
 	<?php
 		}
 	}
@@ -150,8 +153,8 @@
                         <form action="" method="post">
                             <input type="hidden" name="etape" value="validerConsult" />
                             <input type="hidden" name="lstVisiteur" value="<?php echo $_COOKIE['id']; ?>" />
-                            <input id='okSaisi' type='submit' value='Retry' size='20'
-                            title='retry' />
+                            <input id='okSaisi' type='submit' value='Modifier' size='20'/>
+
                         </form>
                         <?php
 		}
