@@ -430,13 +430,4 @@ function modifierEtat($unMois, $idCnx) {
                ' where mois = '". $unMois . "' and idEtat = 'CR'";
     mysql_query($requete, $idCnx);
 }
-
-
-
-function mettreAJourForfaits($modif1, $modif2, $modif3, $modif4){
-    	$bdd->exec('UPDATE fraisforfait SET montant="'.$etp.'" WHERE id="ETP"');
-	$bdd->exec('UPDATE fraisforfait SET montant="'.$km.'" WHERE id="KM"');
-	$bdd->exec('UPDATE fraisforfait SET montant="'.$nui.'" WHERE id="NUI"');
-	$bdd->exec('UPDATE fraisforfait SET montant="'.$rep.'" WHERE id="REP"');
-}
 ?>
