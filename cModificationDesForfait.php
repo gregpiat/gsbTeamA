@@ -56,7 +56,7 @@
 				</p>
 				 
 				<p>
-					 <input type="text" name=<?php echo $donnees['id'];?> value =<?php echo $donnees['montant'];?> required="required">
+					 <input type="number" name=<?php echo $donnees['id'];?> value =<?php echo $donnees['montant'];?> required="required" min="0" max="1000" step="any">
 				</p>
 
 				</p>
@@ -80,9 +80,9 @@
 			<fieldset><legend>Creation d'un forfaits</legend>
 				<form method="post" action="traitementCreationForfait.php">
 					<strong>Nom</strong> :
-					<input type="text" name="nomNF" required="required">
+					<input type="text" name="nomNF" required="required" maxlength="20">
 					<strong>Valeur</strong> :
-					<input type="text" name="valeurNF" required="required">
+					<input type="number" name="valeurNF" required="required" min="0" max="1000" step="any">
 					<input type="submit" value="Creer le forfait" />
 				</form>
 			</fieldset>
