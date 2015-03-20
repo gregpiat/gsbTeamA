@@ -22,7 +22,7 @@
 <?php
 			
 	try {
-	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
+	  $dns = 'mysql:host=localhost;dbname=gsb 2';
 	  $utilisateur = 'root';
 	  $motDePasse = 'root';
  
@@ -44,33 +44,50 @@
 
 // On affiche chaque entrée une à une
 	?>
-	
-	<fieldset><legend>Modification des forfaits</legend>
-	<form method="post" action="traitementModificationForfaits.php"><?php
-while ($donnees = $reponse->fetch())
-{
-?>
-<br>
-<p>
-    <strong>FORFAIT</strong> : <?php echo $donnees['libelle']; ?><br />
-</p>
- 
-<p>
-     <input type="text" name=<?php echo $donnees['id'];?> value =<?php echo $donnees['montant'];?>>
-</p>
+		<div style="display:inline-block;">
+			<fieldset><legend>Modification des forfaits</legend>
+				<form method="post" action="traitementModificationForfaits.php"><?php
+				while ($donnees = $reponse->fetch())
+				{
+				?>
+				<br>
+				<p>
+					<strong>FORFAIT</strong> : <?php echo $donnees['libelle']; ?><br />
+				</p>
+				 
+				<p>
+					 <input type="text" name=<?php echo $donnees['id'];?> value =<?php echo $donnees['montant'];?> required="required">
+				</p>
 
-</p>
-<?php
-}
-?>
-<p>
-     <input type="submit" value="Modifier les forfaits" />
- </p>
-</form>
-<br><br><br>
-<?php
-
-$reponse->closeCursor(); // Termine le traitement de la requête
-?>
+				</p>
+				<?php
+				}
+				?>
+				<p>
+					 <input type="submit" value="Modifier les forfaits" />
+				 </p>
+				</form>
+				<br><br><br>
+				
+				
+				<?php
+				$reponse->closeCursor(); // Termine le traitement de la requête
+				?>
+					
+			</fieldset>
+			
+		<div style="float:right;">
+			<fieldset><legend>Creation d'un forfaits</legend>
+				<form method="post" action="traitementCreationForfait.php">
+					<strong>Nom</strong> :
+					<input type="text" name="nomNF" required="required">
+					<strong>Valeur</strong> :
+					<input type="text" name="valeurNF" required="required">
+					<input type="submit" value="Creer le forfait" />
+				</form>
+			</fieldset>
+		</div>
+	</div>
 </div>
-</fieldset>
+	
+

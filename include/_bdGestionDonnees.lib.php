@@ -30,9 +30,9 @@ function connecterServeurBD() {
  * @return resource identifiant de connexion
   */
 function connecterServeurBDModifForfaits() {
-	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
-	  $utilisateur = 'ModifForfaits';
-	  $motDePasse = 'ModifForfaits';
+	  $dns = 'mysql:host=localhost;dbname=gsb 2';
+	  $utilisateur = 'root';
+	  $motDePasse = 'root';
  
 	// Options de connection
 		$options = array(
@@ -51,8 +51,26 @@ function verifierTypeDesVariables($variable1, $variable2, $variable3, $variable4
 		}
 }
 
+function verifierTypeDesVariablesNF($variable1, $variable2){
+	    if((is_string($variable1))&& (is_numeric($variable2))){
+			return true;
+		}
+		else{
+			return false;
+		}
+}
+
 function verifierValeurDesVariables($variable1, $variable2, $variable3, $variable4){
 		if(($variable1>=0)&& ($variable2>=0) && ($variable3>=0) && ($variable4>=0)){
+			return true;
+		}
+		else{
+		return false;
+		}
+}
+
+function verifierValeurDesVariablesNF($variable1){
+		if(($variable1>=0)){
 			return true;
 		}
 		else{
