@@ -76,7 +76,8 @@
 					
 			</fieldset>
 			
-		<div style="float:right;">
+		<input type="button" value="Creer un nouveau forfait" onclick="masquer_div('creerClient');" />	
+		<div id="creerClient" style="display:none;">
 			<fieldset><legend>Creation d'un forfaits</legend>
 				<form method="post" action="traitementCreationForfait.php">
 					<strong>Nom</strong> :
@@ -87,6 +88,19 @@
 				</form>
 			</fieldset>
 		</div>
+		
+		<script>
+		function masquer_div(id)
+		{
+		  if (document.getElementById(id).style.display == 'none') {
+			   document.getElementById(id).style.display = 'inline-block';
+		  }
+		  else {
+			   document.getElementById(id).style.display = 'none';
+		  }
+		}
+</script>
+		
 	</div>
 </div>
 	

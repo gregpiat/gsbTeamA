@@ -14,10 +14,6 @@
    $testTypes = false;
    $testVariablesEnvoyees = false;
    $testPos = false;
-		?>
-		<script>alert('<?php echo $_POST['nomNF']; ?>');</script>
-		<script>alert(<?php echo $_POST['valeurNF']; ?>);</script>
-		<?php
    
   // Vérification de la récupération des varialbes
     if (isset($_POST['nomNF']) && (isset($_POST['valeurNF']))){
@@ -57,9 +53,7 @@
 	$newId = substr($nom, 0, 3);
 	$newId = strtoupper($newId);
 	
-?>
-		<script>alert('<?php echo $newId ?>');</script>
-		<?php
+
 	// Si les variables ont été reçues, sont de type numérique et sont de valeur positives,
 	// on les insert dans la base de données.
   if (($testVariablesEnvoyees) == true && ($testTypes == true) && ($testPos == true)){	
