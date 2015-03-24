@@ -69,4 +69,4 @@
   }
 
 ?>
-<meta http-equiv="refresh" content="0.1;http://localhost/gsbTeamA/cModificationDesForfait.php" />
+<meta http-equiv="refresh" content="0.1;http://localhost/versionFonctionnelle/cModificationDesForfait.php" />

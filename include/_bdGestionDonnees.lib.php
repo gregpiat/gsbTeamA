@@ -30,7 +30,7 @@ function connecterServeurBD() {
  * @return resource identifiant de connexion
   */
 function connecterServeurBDModifForfaits() {
-	  $dns = 'mysql:host=localhost;dbname=gsb 2';
+	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
 	  $utilisateur = 'root';
 	  $motDePasse = 'root';
  
@@ -77,7 +77,6 @@ function verifierValeurDesVariablesNF($variable1){
 		return false;
 		}
 }
-
 function connectComptable($idIdentifiant){
 	$requete="select comptableReferent from visiteur where id='".$idIdentifiant."'";
     $refComtable = mysql_query($requete);
@@ -91,7 +90,7 @@ function connectComptable($idIdentifiant){
 }
 function detailAllVisiteur(){
     $requete = "select * from visiteur where comptableReferent != ''";
-	$infoVisiteur = mysql_query($requete);
+    $infoVisiteur = mysql_query($requete);
     return $infoVisiteur ;
 }
 function recupModifVisiteur($idVisiteur){
@@ -102,6 +101,11 @@ function recupModifVisiteur($idVisiteur){
 function UpdateModifVisiteur($idSaisi,$txtNom, $txtPrenom, $txtLogin, $txtMdp, $txtAdresse, $txtCp, $txtVille){
 	$requete = "update visiteur set nom = '".$txtNom."', prenom = '".$txtPrenom."', login = '".$txtLogin."', mdp = '".$txtMdp."', adresse = '".$txtAdresse."', cp = '".$txtCp."', ville = '".$txtVille."' where id='".$idSaisi."'";
 	mysql_query($requete);
+}
+function AjoutDunNouveauxVisiteur($txtId,$txtNom, $txtPrenom, $txtLogin, $txtMdp, $txtAdresse, $txtCp, $txtVille, $txtDate, $txtResponsable){
+    $requete = "insert into visiteur (id,nom,prenom,login,mdp,adresse,cp,ville,dateEmbauche,comptableReferent) value ('".$txtId."','".$txtNom."','". $txtPrenom."','". $txtLogin."','". $txtMdp."','". $txtAdresse."','". $txtCp."','". $txtVille."','". $txtDate."','". $txtResponsable."' )";
+    mysql_query($requete);
+    
 }
 
 /**
