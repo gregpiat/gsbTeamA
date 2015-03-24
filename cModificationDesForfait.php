@@ -1,14 +1,14 @@
 <?php
 
 /** 
- * Script de contrôle et d'affichage du cas d'utilisation "Consulter une fiche de frais"
+ * Script de contrï¿½le et d'affichage du cas d'utilisation "Consulter une fiche de frais"
  * @package default
  * @todo  RAS
  */
   $repInclude = './include/';
   require($repInclude . "_init.inc.php");
 
-  // page inaccessible si visiteur non connecté
+  // page inaccessible si visiteur non connectï¿½
   if ( ! estVisiteurConnecte() ) {
       header("Location: cSeConnecter.php");  
   }
@@ -34,43 +34,74 @@
 	// Initialisation de la connection
 	$bdd = new PDO( $dns, $utilisateur, $motDePasse, $options );
 	} catch ( Exception $e ) {
-	echo "Connection à MySQL impossible : ", $e->getMessage();
+	echo "Connection ï¿½ MySQL impossible : ", $e->getMessage();
 	die();
 }
 // Si tout va bien, on peut continuer
 
-// On récupère tout le contenu de la table fraisForfait
+// On rï¿½cupï¿½re tout le contenu de la table fraisForfait
  $reponse = $bdd->query('SELECT * from fraisforfait');
 
-// On affiche chaque entrée une à une
+// On affiche chaque entrï¿½e une ï¿½ une
 	?>
-	
-	<fieldset><legend>Modification des forfaits</legend>
-	<form method="post" action="traitementModificationForfaits.php"><?php
-while ($donnees = $reponse->fetch())
-{
-?>
-<br>
-<p>
-    <strong>FORFAIT</strong> : <?php echo $donnees['libelle']; ?><br />
-</p>
- 
-<p>
-     <input type="text" name=<?php echo $donnees['id'];?> value =<?php echo $donnees['montant'];?>>
-</p>
+		<div style="display:inline-block;">
+			<fieldset><legend>Modification des forfaits</legend>
+				<form method="post" action="traitementModificationForfaits.php"><?php
+				while ($donnees = $reponse->fetch())
+				{
+				?>
+				<br>
+				<p>
+					<strong>FORFAIT</strong> : <?php echo $donnees['libelle']; ?><br />
+				</p>
+				 
+				<p>
+					 <input type="number" name=<?php echo $donnees['id'];?> value =<?php echo $donnees['montant'];?> required="required" min="0" max="1000" step="any">
+				</p>
 
-</p>
-<?php
-}
-?>
-<p>
-     <input type="submit" value="Modifier les forfaits" />
- </p>
-</form>
-<br><br><br>
-<?php
-
-$reponse->closeCursor(); // Termine le traitement de la requête
-?>
+				</p>
+				<?php
+				}
+				?>
+				<p>
+					 <input type="submit" value="Modifier les forfaits" />
+				 </p>
+				</form>
+				<br><br><br>
+				
+				
+				<?php
+				$reponse->closeCursor(); // Termine le traitement de la requï¿½te
+				?>
+					
+			</fieldset>
+			
+		<input type="button" value="Creer un nouveau forfait" onclick="masquer_div('creerClient');" />	
+		<div id="creerClient" style="display:none;">
+			<fieldset><legend>Creation d'un forfaits</legend>
+				<form method="post" action="traitementCreationForfait.php">
+					<strong>Nom</strong> :
+					<input type="text" name="nomNF" required="required" maxlength="20">
+					<strong>Valeur</strong> :
+					<input type="number" name="valeurNF" required="required" min="0" max="1000" step="any">
+					<input type="submit" value="Creer le forfait" />
+				</form>
+			</fieldset>
+		</div>
+		
+		<script>
+		function masquer_div(id)
+		{
+		  if (document.getElementById(id).style.display == 'none') {
+			   document.getElementById(id).style.display = 'inline-block';
+		  }
+		  else {
+			   document.getElementById(id).style.display = 'none';
+		  }
+		}
+</script>
+		
+	</div>
 </div>
-</fieldset>
+	
+
