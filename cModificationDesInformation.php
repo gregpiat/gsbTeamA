@@ -21,6 +21,7 @@
 	  $idSaisi=lireDonneePost("lstVisiteur", "");
 	  $etape=lireDonneePost("etape","");
 	  $saisi = lireDonneePost("saisi","");
+          $newSaisi = lireDonneePost("newSaisi","");
 	  $txtadresse = lireDonneePost("txtadresse","");
 	  $txtMDP = lireDonneePost("txtMDP","");
           $txtnom = lireDonneePost("txtnom","");
@@ -28,14 +29,14 @@
           $txtville = lireDonneePost("txtville","");
           $txtcp = lireDonneePost("txtcp","");
           $txtlogin = lireDonneePost("txtlogin","");
+          $txtDateEmbauche = lireDonneePost("txtDateEmbauche","");
+          $lstResponsable = lireDonneePost("lstResponsable","");
+          $txtID = lireDonneePost("txtID","");
 	  setcookie ("id","$idSaisi");
-
-
-
-
 	?>
 		<div id="contenu">
 		  <h2>Modification des informations</h2>
+                  <button style="width: 150px;">Ajout d'un visiteur</button>
                   <fieldset>
                   <legend><h3>Selection d'un visiteur</h3></legend>
 		  <form action="" method="post">
@@ -43,7 +44,7 @@
 			  <input type="hidden" name="etape" value="validerConsult" />
 		  <p>
 			<label for="lstVisiteur">Visiteur: </label>
-			<select id="lstVisiteur" name="lstVisiteur" title="Sélectionnez le mois souhaité pour la fiche de frais">
+			<select id="lstVisiteur" name="lstVisiteur" title="Sélectionnez le nom du visiteur">
 				<?php
 					// on propose tous les mois pour lesquels le visiteur a une fiche de frais
 					  $detail = detailAllVisiteur();
@@ -159,11 +160,72 @@
                         <?php
 		}
 	}
+        ?>
+                  <fieldset>
+                      <legend><h3>Ajout d'un nouveaux visiteur</h3></legend>
+                      <div class="corpsForm">
+                        <form action="" method="post">
+                            <input type="hidden" name="newSaisi" value="saisiNewVisiteur" />
+                        <label for="txtnom">Nom : </label>
+                        <input type="text" id="txtnom" name="txtnom" size="15" maxlength="30" required="required"><br><br>
+                          <label for="txtprenom">Prénom : </label>
+                          <input type="text" id="txtprenom" name="txtprenom" size="15" maxlength="30" required="required"><br><br>
+                          <label for="txtlogin">Login : </label>
+                          <input type="text" id="txtlogin" name="txtlogin" size="15" maxlength="30" required="required"><br><br>
+                          <label for="txtville">Ville : </label>
+                          <input type="text" id="txtville" name="txtville" size="15" maxlength="30 required="required""><br><br>
+                          <label for="txtcp">CP : </label>
+                          <input type="text" id="txtcp" name="txtcp" size="15" maxlength="30" required="required"><br><br>
+                          <label for="txtadresse">Adresse : </label>
+                          <input type="text" id="txtadresse" name="txtadresse" size="15" maxlength="30" required="required"><br><br>
+                          <label for="txtMDP">Mdp : </label>
+                          <input type="text" id="txtMDP" name="txtMDP" size="15" maxlength="30" required="required"><br><br>
+                          <label for="txtMDP">ID : </label>
+                          <input type="text" id="txtID" name="txtID" size="15" maxlength="30" required="required"><br><br>
+                          <label for="lstResponsable">Responsable: </label>
+                          <select id="lstResponsable" name="lstResponsable" title="Sélectionnez un responsable" required="required">
+                              <option value="c03">Michel Jean</option>
+                              <option value="c04">Martin Jacques</option>
+                          </select><br><br>
+                          <label for="txtDateEmbauche">Date d'embauche : </label>
+                          <input type="text" id="txtDateEmbauche" name="txtDateEmbauche" size="15" maxlength="30" placeholder="ex:année-mois-jours"required="required"><br><br>
+                            <input id="okSaisiVisiteur" type="submit" value="Valider" size="20"
+					   title="Valide les données ajouté" />
+                        </form>
+                         </div>
+                    </fieldset>
+		  <?php      
+	if ( $newSaisi == "saisiNewVisiteur" ) {
+		if ( nbErreurs($tabErreurs) > 0 ) {
+			echo toStringErreurs($tabErreurs) ;
+		}
+		else {
+                    $valideSaisi = true;
+                    $reqNewSaisi = detailAllVisiteur();
+                    while ($reqUser = mysql_fetch_array($reqNewSaisi)) {
+                      $id = $reqUser['id'];
+                      $nom = $reqUser['nom'];
+                      $login =$reqUser['login'];
+                      if(($id == $txtID) || ($nom == $txtnom) || ($login == $txtlogin)){
+                          $valideSaisi = false;
+                      }
+                    }
+                    if($valideSaisi==true){
+                        AjoutDunNouveauxVisiteur($txtID,$txtnom,$txtprenom,$txtlogin,$txtMDP,$txtadresse,$txtcp,$txtville,$txtDateEmbauche,$lstResponsable);
+                        echo "Le nouvelle utilisateur à était ajouté";
+                    }
+                    else
+                    {
+                        echo "<strong>La saisi d'un nom, id ou login existe déjà, changer les champs !</strong>";
+                        ?> <script>alert("La saisi d'un nom, id ou login existe déjà, changer les champs !");</script><?php
+                    }
+                }
+        }
 }
 
 else{
 	echo "Vous devez vous identifier";
 }      
-  require($repInclude . "_pied.inc.html");
+  //require($repInclude . "_pied.inc.html");
   require($repInclude . "_fin.inc.php");
 ?> 
