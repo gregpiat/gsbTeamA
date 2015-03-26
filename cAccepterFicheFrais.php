@@ -7,6 +7,8 @@
   $repInclude = './include/';
   require($repInclude . "_init.inc.php");
 
+  //TEST git
+  
   // page inaccessible si utilisateur non connectée en tant que comptable 
   if ( ! estVisiteurConnecte() ) {
       header("Location: cSeConnecter.php");
