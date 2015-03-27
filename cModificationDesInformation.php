@@ -35,42 +35,45 @@
 	  setcookie ("id","$idSaisi");
 	?>
 		<div id="contenu">
-		  <h2>Modification des informations</h2>
-                  <button style="width: 150px;">Ajout d'un visiteur</button>
-                  <fieldset>
-                  <legend><h3>Selection d'un visiteur</h3></legend>
-		  <form action="" method="post">
-		  <div class="corpsForm">
-			  <input type="hidden" name="etape" value="validerConsult" />
-		  <p>
-			<label for="lstVisiteur">Visiteur: </label>
-			<select id="lstVisiteur" name="lstVisiteur" title="Sélectionnez le nom du visiteur">
-				<?php
-					// on propose tous les mois pour lesquels le visiteur a une fiche de frais
-					  $detail = detailAllVisiteur();
-					while ($lgUser = mysql_fetch_array($detail)) {
-					  $id = $lgUser['id'];
-					  $nom = $lgUser['nom'];
-					  $prenom = $lgUser['prenom'];
-				?>    
-				<option value="<?php echo $lgUser['id']; ?>"<?php if ($idSaisi == $id) { ?> selected="selected"<?php } ?>><?php  echo $lgUser['nom']; echo "&nbsp;"; echo $lgUser['prenom']; ?></option>
-				<?php
-   
-					}
-				?>
-			</select>
-		  </p>
-		  </div>
-                  
-		  <div class="piedForm">
-		  <p>
-			<input id="ok" type="submit" value="Valider" size="20"
-				   title="Valide la selection" />
-		  </p> 
-		  </div>
-			
-		  </form>
-                  </fieldset>
+		  <h2>Modification des informations et Ajout d'un nouveaux visiteur</h2>
+                  <button style="width: 150px;" onclick="masquer_div('creerVisiteur');" />Ajout d'un visiteur</button>
+                  <button style="width: 200px;" onclick="masquer_div('modificationVisiteur');" />Modification des informations</button>
+                  <div>
+                    <fieldset id="modificationVisiteur" style="display:none;">
+                    <legend><h3>Selection d'un visiteur</h3></legend>
+                    <form action="" method="post">
+                    <div class="corpsForm">
+                            <input type="hidden" name="etape" value="validerConsult" />
+                    <p>
+                          <label for="lstVisiteur">Visiteur: </label>
+                          <select id="lstVisiteur" name="lstVisiteur" title="Sélectionnez le nom du visiteur">
+                                  <?php
+                                          // on propose tous les mois pour lesquels le visiteur a une fiche de frais
+                                            $detail = detailAllVisiteur();
+                                          while ($lgUser = mysql_fetch_array($detail)) {
+                                            $id = $lgUser['id'];
+                                            $nom = $lgUser['nom'];
+                                            $prenom = $lgUser['prenom'];
+                                  ?>    
+                                  <option value="<?php echo $lgUser['id']; ?>"<?php if ($idSaisi == $id) { ?> selected="selected"<?php } ?>><?php  echo $lgUser['nom']; echo "&nbsp;"; echo $lgUser['prenom']; ?></option>
+                                  <?php
+
+                                          }
+                                  ?>
+                          </select>
+                    </p>
+                    </div>
+
+                    <div class="piedForm">
+                    <p>
+                          <input id="ok" type="submit" value="Valider" size="20"
+                                     title="Valide la selection" />
+                    </p> 
+                    </div>
+
+                    </form>
+                    </fieldset>
+                  </div>
 		  <?php      
 
 // demande et affichage des différents éléments (forfaitisés et non forfaitisés)
@@ -92,7 +95,8 @@
                       $ville=$reqUser['ville'];
                     }
 	?>
-                  <fieldset>
+                
+                  <fieldset name="modificationVisiteur" style="display:block;">
 		  <form action="" method="post">
 			  <div class="corpsForm">
 				  <input type="hidden" name="saisi" value="validerSaisi" />
@@ -157,11 +161,14 @@
                             <input id='okSaisi' type='submit' value='Modifier' size='20'/>
 
                         </form>
+                
                         <?php
 		}
 	}
         ?>
-                  <fieldset>
+                	
+		<div>
+                  <fieldset id="creerVisiteur" style="display:none;">
                       <legend><h3>Ajout d'un nouveaux visiteur</h3></legend>
                       <div class="corpsForm">
                         <form action="" method="post">
@@ -194,6 +201,7 @@
                         </form>
                          </div>
                     </fieldset>
+                </div>
 		  <?php      
 	if ( $newSaisi == "saisiNewVisiteur" ) {
 		if ( nbErreurs($tabErreurs) > 0 ) {
@@ -221,6 +229,36 @@
                     }
                 }
         }
+?>
+<script>
+		function masquer_div(id)
+		{
+		  if (document.getElementById(id).style.display == 'none') {
+                           if(id != document.getElementById("creerVisiteur") && document.getElementById("creerVisiteur").style.display == 'block')
+                           {
+                               document.getElementById("creerVisiteur").style.display = 'none';
+                           }
+                           else
+                           {
+                                if(id != document.getElementById("modificationVisiteur") && document.getElementById("modificationVisiteur").style.display == 'block')
+                                {
+                                     document.getElementById("modificationVisiteur").style.display = 'none';
+                                }
+                            }
+                            document.getElementById(id).style.display = 'block';
+		  }
+		  else {
+			   document.getElementById(id).style.display = 'none';  
+		  }
+                  if(	document.getElementsByName("modificationVisiteur").style.display == 'block'){
+                      	document.getElementsByName("modificationVisiteur").style.display = 'none';
+                  }
+                  else{
+                      	document.getElementsByName("modificationVisiteur").style.display = 'none';
+                  }
+		}
+</script>
+<?php
 }
 
 else{
