@@ -35,7 +35,7 @@ body{
 #menuGauche {
 	margin-top : 0.8em;
 	padding: 1em;
-	background-color: white;
+	//background-color: white;
 	color: rgb(0,85,227);
 	float: left;
 	width: 14%;

@@ -61,7 +61,7 @@
               <a href="cModificationDesForfait.php" title="Modification des Forfaits">Modification des Forfaits</a><br>
            </li>
 	   <li class="smenu">
-              <a href="cModificationDesInformation.php" title="Modification des Informations">Modification des informations</a><br>
+              <a href="cModificationDesInformation.php" title="Modification des Informations">Ajout,modification des visiteurs</a><br>
            </li>
            <?php
              }

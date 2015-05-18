@@ -36,8 +36,10 @@
 	?>
 		<div id="contenu">
 		  <h2>Modification des informations et Ajout d'un nouveaux visiteur</h2>
+                  <p>
                   <button style="width: 150px;" onclick="masquer_div('creerVisiteur');" />Ajout d'un visiteur</button>
                   <button style="width: 200px;" onclick="masquer_div('modificationVisiteur');" />Modification des informations</button>
+                  </p>
                   <div>
                     <fieldset id="modificationVisiteur" style="display:none;">
                     <legend><h3>Selection d'un visiteur</h3></legend>
@@ -135,24 +137,26 @@
 
 		}
 		else {
-                    ?><div id="modificationVisiteurAffiche" style="display:block;"><?php
+                    ?><div id="modificationVisiteurAffiche" style="display:block;">
+                        <fieldset>
+                        <?php
 			UpdateModifVisiteur($_COOKIE['id'],$txtnom, $txtprenom, $txtlogin, $txtMDP, $txtadresse, $txtcp, $txtville);
                         $req = recupModifVisiteur($_COOKIE['id']);
                         echo "<strong>Les informations modifié</strong><br>";
 			while ($reqUser = mysql_fetch_array($req)) {
-			  echo "Adresse : ", $reqUser['adresse'];
+			  echo "<label for='txtadresse'>Adresse : </label>", $reqUser['adresse'];
                           echo "<br>";
-			  echo "mdp : ",$reqUser['mdp'];
+			  echo "<label for='txtMDP'>Mdp : </label>",$reqUser['mdp'];
                           echo "<br>";
-                          echo "Nom : ",$reqUser['nom'];
+                          echo "<label for='txtnom'>Nom : </label>",$reqUser['nom'];
                           echo "<br>";
-                          echo "Prenom : ",$reqUser['prenom'];
+                          echo "<label for='txtprenom'>Prénom : </label>",$reqUser['prenom'];
                           echo "<br>";
-                          echo "Login : ",$reqUser['login'];
+                          echo "<label for='txtlogin'>Login : </label>",$reqUser['login'];
                           echo "<br>";
-                          echo "CP : ",$reqUser['cp'];
+                          echo "<label for='txtcp'>CP : </label>",$reqUser['cp'];
                           echo "<br>";
-                          echo "Ville : ",$reqUser['ville'];
+                          echo "<label for='txtville'>Ville : </label>",$reqUser['ville'];
                           echo "<br>";
 			}
 			echo "<strong>Mise a jour effectué</strong>";
@@ -163,6 +167,7 @@
                             <input id='okSaisi' type='submit' value='Modifier' size='20'/>
 
                         </form>
+                        </fieldset>
                 </div>
                 
                         <?php
