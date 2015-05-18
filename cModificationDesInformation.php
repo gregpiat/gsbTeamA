@@ -95,8 +95,8 @@
                       $ville=$reqUser['ville'];
                     }
 	?>
-                
-                  <fieldset name="modificationVisiteur" style="display:block;">
+                <div>
+                <fieldset  id="modificationVisiteurAffiche" style="display:block;">
 		  <form action="" method="post">
 			  <div class="corpsForm">
 				  <input type="hidden" name="saisi" value="validerSaisi" />
@@ -125,6 +125,7 @@
 			  </div>
 		  </form>
                   </fieldset>
+                </div>
 	<?php
 		}
 	}
@@ -134,6 +135,7 @@
 
 		}
 		else {
+                    ?><div id="modificationVisiteurAffiche" style="display:block;"><?php
 			UpdateModifVisiteur($_COOKIE['id'],$txtnom, $txtprenom, $txtlogin, $txtMDP, $txtadresse, $txtcp, $txtville);
                         $req = recupModifVisiteur($_COOKIE['id']);
                         echo "<strong>Les informations modifié</strong><br>";
@@ -161,6 +163,7 @@
                             <input id='okSaisi' type='submit' value='Modifier' size='20'/>
 
                         </form>
+                </div>
                 
                         <?php
 		}
@@ -202,6 +205,7 @@
                          </div>
                     </fieldset>
                 </div>
+                <div id="creerVisiteurAffiche" style="display:block;">
 		  <?php      
 	if ( $newSaisi == "saisiNewVisiteur" ) {
 		if ( nbErreurs($tabErreurs) > 0 ) {
@@ -218,6 +222,7 @@
                           $valideSaisi = false;
                       }
                     }
+                    
                     if($valideSaisi==true){
                         AjoutDunNouveauxVisiteur($txtID,$txtnom,$txtprenom,$txtlogin,$txtMDP,$txtadresse,$txtcp,$txtville,$txtDateEmbauche,$lstResponsable);
                         echo "Le nouvelle utilisateur à était ajouté";
@@ -230,6 +235,7 @@
                 }
         }
 ?>
+                        </div>
 <script>
 		function masquer_div(id)
 		{
@@ -237,25 +243,28 @@
                            if(id != document.getElementById("creerVisiteur") && document.getElementById("creerVisiteur").style.display == 'block')
                            {
                                document.getElementById("creerVisiteur").style.display = 'none';
+                               document.getElementById("modificationVisiteurAffiche").style.display = 'none';
+                               document.getElementById("creerVisiteurAffiche").style.display = 'none';
                            }
                            else
                            {
                                 if(id != document.getElementById("modificationVisiteur") && document.getElementById("modificationVisiteur").style.display == 'block')
                                 {
                                      document.getElementById("modificationVisiteur").style.display = 'none';
+                                     document.getElementById("modificationVisiteurAffiche").style.display = 'none';
+                                     document.getElementById("creerVisiteurAffiche").style.display = 'none';
                                 }
                             }
                             document.getElementById(id).style.display = 'block';
 		  }
 		  else {
 			   document.getElementById(id).style.display = 'none';  
+                           document.getElementById("modificationVisiteurAffiche").style.display = 'none';
+                           document.getElementById("creerVisiteurAffiche").style.display = 'none';
 		  }
-                  if(	document.getElementsByName("modificationVisiteur").style.display == 'block'){
-                      	document.getElementsByName("modificationVisiteur").style.display = 'none';
-                  }
-                  else{
-                      	document.getElementsByName("modificationVisiteur").style.display = 'none';
-                  }
+                  document.getElementById("modificationVisiteurAffiche").style.display = 'none';
+                  document.getElementById("creerVisiteurAffiche").style.display = 'none';
+                  
 		}
 </script>
 <?php
