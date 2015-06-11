@@ -17,7 +17,7 @@
 function connecterServeurBD() {
     $hote = "localhost";
     $login = "root";
-    $mdp = "root";
+    $mdp = "mdp";
     return mysql_connect($hote, $login, $mdp);
 }
 /** 
@@ -32,7 +32,7 @@ function connecterServeurBD() {
 function connecterServeurBDModifForfaits() {
 	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
 	  $utilisateur = 'root';
-	  $motDePasse = 'root';
+	  $motDePasse = 'mdp';
  
 	// Options de connection
 		$options = array(

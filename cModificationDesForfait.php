@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /** 
  * Script de contr�le et d'affichage du cas d'utilisation "Consulter une fiche de frais"
@@ -24,7 +24,7 @@
 	try {
 	  $dns = 'mysql:host=localhost;dbname=gsb_frais';
 	  $utilisateur = 'root';
-	  $motDePasse = 'root';
+	  $motDePasse = 'mdp';
  
 	// Options de connection
 		$options = array(

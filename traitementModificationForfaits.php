@@ -56,4 +56,4 @@
    }
 
 ?>
-<meta http-equiv="refresh" content="0.1;http://localhost/versionFonctionnelle/cModificationDesForfait.php" />
+<meta http-equiv="refresh" content="0.1;http://172.17.21.23/cModificationDesForfait.php" />
